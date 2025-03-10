@@ -53,6 +53,15 @@ type TranslationKeys = {
     lastTransaction: string
     backHome: string
   }
+  gallery: {
+    title: string
+    subtitle: string
+    mainTitle: string
+    mainSubtitle: string
+    viewGalleryButton: string
+    connectPrompt: string
+    loadMore: string
+  }
 }
 
 // Define translations for each supported language
@@ -109,6 +118,15 @@ export const translations: Translations = {
       lastTransaction: 'Last Transaction:',
       backHome: 'Back Home',
     },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
+    },
   },
 
   // Mandarin Chinese
@@ -158,6 +176,15 @@ export const translations: Translations = {
       connectWallet: '连接您的钱包以开始',
       lastTransaction: '最后交易：',
       backHome: '返回首页',
+    },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
     },
   },
 
@@ -209,6 +236,15 @@ export const translations: Translations = {
       lastTransaction: 'अंतिम लेनदेन:',
       backHome: 'होम पर वापस जाएं',
     },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
+    },
   },
 
   // Spanish
@@ -258,6 +294,15 @@ export const translations: Translations = {
       connectWallet: 'Conecta tu billetera para comenzar',
       lastTransaction: 'Última transacción:',
       backHome: 'Volver a Inicio',
+    },
+    gallery: {
+      title: 'Galería de Fotos',
+      subtitle: 'Una colección de hermosos momentos',
+      mainTitle: 'Tu Galería de Fotos Personal',
+      mainSubtitle: 'Una hermosa manera de mostrar y preservar tus recuerdos',
+      viewGalleryButton: 'Ver Galería',
+      connectPrompt: 'Conecta tu wallet para acceder a tu galería de fotos',
+      loadMore: 'Cargar Más Fotos',
     },
   },
 
@@ -311,6 +356,15 @@ export const translations: Translations = {
       lastTransaction: 'Dernière transaction :',
       backHome: "Retour à l'accueil",
     },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
+    },
   },
 
   // Arabic
@@ -361,6 +415,15 @@ export const translations: Translations = {
       lastTransaction: 'آخر معاملة:',
       backHome: 'العودة إلى الصفحة الرئيسية',
     },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
+    },
   },
 
   // Bengali
@@ -410,6 +473,15 @@ export const translations: Translations = {
       connectWallet: 'শুরু করতে আপনার ওয়ালেট সংযোগ করুন',
       lastTransaction: 'সর্বশেষ লেনদেন:',
       backHome: 'হোমে ফিরে যান',
+    },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
     },
   },
 
@@ -462,6 +534,15 @@ export const translations: Translations = {
       lastTransaction: 'Последняя транзакция:',
       backHome: 'Вернуться на главную',
     },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
+    },
   },
 
   // Portuguese
@@ -512,6 +593,15 @@ export const translations: Translations = {
       lastTransaction: 'Última transação:',
       backHome: 'Voltar para a Página Inicial',
     },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
+    },
   },
 
   // Urdu
@@ -561,6 +651,15 @@ export const translations: Translations = {
       connectWallet: 'شروع کرنے کے لیے اپنا والیٹ منسلک کریں',
       lastTransaction: 'آخری لین دین:',
       backHome: 'ہوم پیج پر واپس جائیں',
+    },
+    gallery: {
+      title: 'Photo Gallery',
+      subtitle: 'A collection of beautiful moments',
+      mainTitle: 'Your Personal Photo Gallery',
+      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
+      viewGalleryButton: 'View Gallery',
+      connectPrompt: 'Connect your wallet to access your photo gallery',
+      loadMore: 'Load More Photos',
     },
   },
 }

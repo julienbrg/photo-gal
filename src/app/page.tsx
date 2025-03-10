@@ -1,128 +1,68 @@
 'use client'
 
-import { Container, Text, useToast, Button, Tooltip } from '@chakra-ui/react'
-import { useAppKitAccount, useAppKitNetwork, useAppKitProvider } from '@reown/appkit/react'
-import { BrowserProvider, parseEther, formatEther } from 'ethers'
-import { useState, useEffect } from 'react'
-import Link from 'next/link'
+import { Box, Container, Text, Button, Flex, Heading } from '@chakra-ui/react'
+import { useAppKitAccount } from '@reown/appkit/react'
+import { useState } from 'react'
 import { useTranslation } from '@/hooks/useTranslation'
+import Gallery from '@/components/Gallery'
 
 export default function Home() {
   const [isLoading, setIsLoading] = useState(false)
-  const [txLink, setTxLink] = useState<string>()
-  const [txHash, setTxHash] = useState<string>()
-  const [balance, setBalance] = useState<string>('0')
-
-  const { address, isConnected } = useAppKitAccount()
-  const { walletProvider } = useAppKitProvider('eip155')
-  const toast = useToast()
+  const { isConnected } = useAppKitAccount()
   const t = useTranslation()
 
-  useEffect(() => {
-    const checkBalance = async () => {
-      if (address && walletProvider) {
-        try {
-          const provider = new BrowserProvider(walletProvider as any)
-          const balance = await provider.getBalance(address)
-          setBalance(formatEther(balance))
-        } catch (error) {
-          console.error('Error fetching balance:', error)
-        }
-      }
-    }
-
-    checkBalance()
-  }, [address, walletProvider])
-
-  const handleSend = async () => {
-    setTxHash('')
-    setTxLink('')
-    if (!address || !walletProvider) {
-      toast({
-        title: t.common.error,
-        description: t.home.notConnected,
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      })
-      return
-    }
-
-    setIsLoading(true)
-    try {
-      const provider = new BrowserProvider(walletProvider as any)
-      const signer = await provider.getSigner()
-
-      const tx = await signer.sendTransaction({
-        to: address,
-        value: parseEther('0.0001'),
-      })
-
-      const receipt = await tx.wait(1)
-
-      setTxHash(receipt?.hash)
-      setTxLink('https://sepolia.etherscan.io/tx/' + receipt?.hash)
-
-      toast({
-        title: t.common.success,
-        description: `${t.home.transactionSuccess}: 0.0001 ETH to ${address}`,
-        status: 'success',
-        duration: 5000,
-        isClosable: true,
-      })
-    } catch (error) {
-      console.error('Transaction failed:', error)
-      toast({
-        title: t.home.transactionFailed,
-        description: error instanceof Error ? error.message : 'Unknown error occurred',
-        status: 'error',
-        duration: 5000,
-        isClosable: true,
-      })
-    } finally {
-      setIsLoading(false)
-    }
-  }
-
-  const hasEnoughBalance = Number(balance) >= 0.0001
-
   return (
-    <Container maxW="container.sm" py={20}>
-      <Text mb={4}>{t.home.title}</Text>
-      {isConnected && (
-        <Tooltip
-          label={!hasEnoughBalance ? t.home.insufficientBalance : ''}
-          isDisabled={hasEnoughBalance}
-          hasArrow
-          bg="black"
-          color="white"
-          borderWidth="1px"
-          borderColor="red.500"
-          borderRadius="md"
-          p={2}
-        >
-          <Button
-            onClick={handleSend}
-            isLoading={isLoading}
-            loadingText={t.common.loading}
-            bg="#45a2f8"
+    <Box>
+      {/* Hero Section */}
+      <Box
+        width="100%"
+        bgImage="url('/huangshan.png')"
+        bgSize="cover"
+        bgPosition="center"
+        position="relative"
+        height="70vh"
+      >
+        <Box position="absolute" top="0" left="0" width="100%" height="100%" bg="blackAlpha.700" />
+        <Container maxW="container.lg" height="100%" position="relative" zIndex="1">
+          <Flex
+            direction="column"
+            justify="center"
+            align="center"
+            textAlign="center"
+            height="100%"
             color="white"
-            _hover={{
-              bg: '#3182ce',
-            }}
-            isDisabled={!hasEnoughBalance}
           >
-            {t.home.sendEth}
-          </Button>
-        </Tooltip>
-      )}
-      {txHash && isConnected && (
-        <Text py={4} fontSize="14px" color="#45a2f8">
-          <Link target="_blank" rel="noopener noreferrer" href={txLink ? txLink : ''}>
-            {txHash}
-          </Link>
-        </Text>
-      )}
-    </Container>
+            <Heading as="h1" size="2xl" mb={4}>
+              {t.gallery?.mainTitle || 'Your Personal Photo Gallery'}
+            </Heading>
+            <Text fontSize="xl" maxW="container.md" mb={8}>
+              {t.gallery?.mainSubtitle || 'A beautiful way to showcase and preserve your memories'}
+            </Text>
+            {isConnected ? (
+              <Button
+                bg="#45a2f8"
+                color="white"
+                size="lg"
+                _hover={{
+                  bg: '#3182ce',
+                }}
+                onClick={() => window.scrollTo({ top: 700, behavior: 'smooth' })}
+              >
+                {t.gallery?.viewGalleryButton || 'View Gallery'}
+              </Button>
+            ) : (
+              <Text p={4} bg="blackAlpha.600" borderRadius="md" fontSize="md">
+                {t.gallery?.connectPrompt || 'Connect your wallet to access your photo gallery'}
+              </Text>
+            )}
+          </Flex>
+        </Container>
+      </Box>
+
+      {/* Gallery Section */}
+      <Box bg="black" py={10}>
+        <Gallery />
+      </Box>
+    </Box>
   )
 }
