@@ -62,6 +62,16 @@ type TranslationKeys = {
     connectPrompt: string
     loadMore: string
   }
+  addressesPage?: {
+    title: string
+    subtitle: string
+    searchPlaceholder: string
+    viewOnEtherscan: string
+    showing: string
+    of: string
+    addresses: string
+    noAddressesFound: string
+  }
 }
 
 // Define translations for each supported language
@@ -105,7 +115,7 @@ export const translations: Translations = {
       verificationFailed: 'Signature does not match the current wallet address',
     },
     navigation: {
-      newPage: 'New page',
+      newPage: 'Admin',
       walletGenerator: 'Wallet generator',
     },
     newPage: {
@@ -119,13 +129,23 @@ export const translations: Translations = {
       backHome: 'Back Home',
     },
     gallery: {
-      title: 'Photo Gallery',
-      subtitle: 'A collection of beautiful moments',
-      mainTitle: 'Your Personal Photo Gallery',
-      mainSubtitle: 'A beautiful way to showcase and preserve your memories',
-      viewGalleryButton: 'View Gallery',
-      connectPrompt: 'Connect your wallet to access your photo gallery',
-      loadMore: 'Load More Photos',
+      title: 'Toutes les photos',
+      subtitle: 'La sélection officielle',
+      mainTitle: 'Coucou !',
+      mainSubtitle: 'Voici quelques photos',
+      viewGalleryButton: 'Voir les photos secrètes',
+      connectPrompt: 'Connectez-vous pour voir les photos secrètes',
+      loadMore: 'Voir plus de photos',
+    },
+    addressesPage: {
+      title: 'Ethereum Addresses',
+      subtitle: 'Whitelisted addresses for the application',
+      searchPlaceholder: 'Search addresses...',
+      viewOnEtherscan: 'View on Etherscan',
+      showing: 'Showing',
+      of: 'of',
+      addresses: 'addresses',
+      noAddressesFound: 'No addresses found',
     },
   },
 
