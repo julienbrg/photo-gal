@@ -124,7 +124,7 @@ export default function Header() {
               size="sm"
             />
             <MenuList>
-              <Link href="/new" color="white">
+              <Link href="/admin" color="white">
                 <MenuItem fontSize="md">{t.navigation.newPage}</MenuItem>
               </Link>
               <Link href="/wallet" color="white">
