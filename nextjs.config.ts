@@ -1,8 +1,7 @@
 import type { NextConfig } from 'next'
-import type { Configuration as WebpackConfig } from 'webpack'
 
 const nextConfig: NextConfig = {
-  webpack: (config: WebpackConfig, { isServer, dev }): WebpackConfig => {
+  webpack: (config: any, { dev }) => {
     const optimization = config.optimization || {}
     const splitChunks = optimization.splitChunks || {}
     const cacheGroups = (splitChunks as any).cacheGroups || {}
@@ -39,13 +38,13 @@ const nextConfig: NextConfig = {
         type: 'filesystem',
         compression: 'brotli',
         maxGenerations: 1,
-      } as WebpackConfig['cache']
+      }
     }
 
     return config
   },
   experimental: {
-    optimizePackageImports: ['@reown/appkit', '@walletconnect/universal-provider'],
+    optimizePackageImports: [],
   },
 }
 
