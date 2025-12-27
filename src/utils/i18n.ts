@@ -19,7 +19,7 @@ export const SUPPORTED_LANGUAGES = {
 
 export type Language = keyof typeof SUPPORTED_LANGUAGES
 
-export const DEFAULT_LANGUAGE: Language = 'en'
+export const DEFAULT_LANGUAGE: Language = 'fr'
 
 export function detectUserLanguage(): Language {
   if (typeof window === 'undefined' || !navigator || !navigator.language) {
