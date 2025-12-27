@@ -94,7 +94,7 @@ export default function NaissancePage() {
   return (
     <>
       <VStack gap={6} py={8} mt={30} align="stretch">
-        {list.map((item) => (
+        {list.map(item => (
           <Box
             key={item.id}
             border="3px solid"
@@ -133,9 +133,7 @@ export default function NaissancePage() {
         <Dialog.Positioner>
           <Dialog.Content>
             <Dialog.Header>
-              <Dialog.Title>
-                {selectedItem ? selectedItem.name : 'Réserver'}
-              </Dialog.Title>
+              <Dialog.Title>{selectedItem ? selectedItem.name : 'Réserver'}</Dialog.Title>
             </Dialog.Header>
             <Dialog.Body py={6}>
               <Field label="Prénom(s)">

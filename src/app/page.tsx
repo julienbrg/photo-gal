@@ -13,7 +13,7 @@ export default function Home() {
   const handleClick = () => {
     setIsFlipping(true)
     setTimeout(() => {
-      setCurrentImage((prev) => (prev + 1) % images.length)
+      setCurrentImage(prev => (prev + 1) % images.length)
       setIsFlipping(false)
     }, 100)
   }
