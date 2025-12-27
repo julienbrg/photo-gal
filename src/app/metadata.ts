@@ -1,23 +1,24 @@
 import { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Genji',
-  description: 'Next.js + Web3 Modal + Ethers.js + Chakra UI',
+  metadataBase: new URL('https://w3pk.w3hc.org'),
 
-  keywords: ['Web3', 'Next.js', 'Ethereum', 'DApp', 'Blockchain', 'Wallet'],
-  authors: [{ name: 'Julien', url: 'https://github.com/julienbrg' }],
+  title: 'Céline et Julien',
+  description: 'Le site de Céline et Julien',
+
+  keywords: ['Céline et Julien', 'w3pk', 'WebAuthn', 'Next.js', 'Web3', 'Ethereum'],
+  authors: [{ name: 'W3HC', url: 'https://github.com/w3hc' }],
 
   openGraph: {
-    title: 'Genji',
-    description: 'Next.js + Web3 Modal + Ethers.js + Chakra UI',
-    url: 'https://genji-app.netlify.app',
-    siteName: 'Genji',
+    title: 'Céline et Julien',
+    description: 'Le site de Céline et Julien',
+    siteName: 'Céline et Julien',
     images: [
       {
         url: '/huangshan.png',
         width: 1200,
         height: 630,
-        alt: 'Genji Web3 Application',
+        alt: 'Le site de Céline et Julien',
       },
     ],
     locale: 'en_US',
@@ -26,8 +27,8 @@ export const metadata: Metadata = {
 
   twitter: {
     card: 'summary_large_image',
-    title: 'Genji',
-    description: 'Next.js + Web3 Modal + Ethers.js + Chakra UI',
+    title: 'Céline et Julien',
+    description: 'Le site de Céline et Julien',
     images: ['/huangshan.png'],
     creator: '@julienbrg',
   },
