@@ -6,29 +6,16 @@ import { useState } from 'react'
 
 export default function Home() {
   const [currentImage, setCurrentImage] = useState(0)
-  const [isFlipping, setIsFlipping] = useState(false)
   const images = ['/srilanka-2024.jpg', '/chantegrue-2023.jpg']
   const alts = ['Sri Lanka 2024', 'Chantegrue 2023']
 
   const handleClick = () => {
-    setIsFlipping(true)
-    setTimeout(() => {
-      setCurrentImage(prev => (prev + 1) % images.length)
-      setIsFlipping(false)
-    }, 100)
+    setCurrentImage(prev => (prev + 1) % images.length)
   }
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" p={8}>
-      <Box
-        onClick={handleClick}
-        cursor="pointer"
-        style={{
-          transform: isFlipping ? 'rotateY(180deg)' : 'rotateY(0deg)',
-          transition: 'transform 0.2s ease-in-out',
-          transformStyle: 'preserve-3d',
-        }}
-      >
+      <Box onClick={handleClick} cursor="pointer" transition="opacity 0.3s ease-in-out">
         <Image
           src={images[currentImage]}
           alt={alts[currentImage]}
