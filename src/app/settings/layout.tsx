@@ -10,7 +10,7 @@ export const metadata: Metadata = {
     siteName: 'Céline et Julien',
     images: [
       {
-        url: '/huangshan.png',
+        url: '/public/srilanka-2024.jpg',
         width: 1200,
         height: 630,
         alt: 'Manage your accounts, backups, and recovery options for your w3pk wallet.',
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Settings | Céline et Julien',
     description: 'Manage your accounts, backups, and recovery options for your w3pk wallet.',
-    images: ['/huangshan.png'],
+    images: ['/public/srilanka-2024.jpg'],
     creator: '@julienbrg',
   },
 }

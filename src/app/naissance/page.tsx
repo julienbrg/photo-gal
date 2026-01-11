@@ -7,6 +7,7 @@ import { Dialog } from '@/components/ui/dialog'
 import { Input } from '@/components/ui/input'
 import { Field } from '@/components/ui/field'
 import { Button } from '@/components/ui/button'
+import Spinner from '@/components/Spinner'
 
 interface NaissanceItem {
   id: number
@@ -86,7 +87,7 @@ export default function NaissancePage() {
   if (loading) {
     return (
       <VStack gap={6} py={8} mt={30} align="stretch">
-        <Text>Chargement...</Text>
+        <Spinner />
       </VStack>
     )
   }
@@ -97,7 +98,7 @@ export default function NaissancePage() {
         {list.map(item => (
           <Box
             key={item.id}
-            border="3px solid"
+            border="1px solid"
             borderColor={brandColors.accent}
             borderRadius="xl"
             p={6}
@@ -117,7 +118,12 @@ export default function NaissancePage() {
                 {item.description}
               </Text>
               {item.link && (
-                <Link href={item.link} target="_blank" rel="noopener noreferrer">
+                <Link
+                  href={item.link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={e => e.stopPropagation()}
+                >
                   <Text fontSize="sm" color="blue.500" _hover={{ textDecoration: 'underline' }}>
                     {item.link}
                   </Text>
