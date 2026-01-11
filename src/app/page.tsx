@@ -21,7 +21,7 @@ export default function Home() {
   }
 
   return (
-    <Box display="flex" justifyContent="center" alignItems="center" p={8} pb={32}>
+    <Box display="flex" justifyContent="center" alignItems="center" p={8} pb={500}>
       <Box onClick={handleClick} cursor="pointer" style={{ perspective: '1000px' }}>
         <Box
           style={{
