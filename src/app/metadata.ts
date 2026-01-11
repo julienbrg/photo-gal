@@ -15,8 +15,8 @@ export const metadata: Metadata = {
     siteName: 'Céline et Julien',
     images: [
       {
-        url: '/public/srilanka-2024.jpg',
-        width: 1200,
+        url: '/srilanka-2024-resized.jpg',
+        width: 840,
         height: 630,
         alt: 'Le site de Céline et Julien',
       },
@@ -29,7 +29,7 @@ export const metadata: Metadata = {
     card: 'summary_large_image',
     title: 'Céline et Julien',
     description: 'Le site de Céline et Julien',
-    images: ['/public/srilanka-2024.jpg'],
+    images: ['/srilanka-2024-resized.jpg'],
     creator: '@julienbrg',
   },
 
