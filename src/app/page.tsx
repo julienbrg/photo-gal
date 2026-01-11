@@ -22,6 +22,19 @@ export default function Home() {
 
   return (
     <Box display="flex" justifyContent="center" alignItems="center" p={8} pb={500}>
+      {/* Preload all images */}
+      {images.map((src, index) => (
+        <Image
+          key={src}
+          src={src}
+          alt={alts[index]}
+          width={1200}
+          height={800}
+          priority
+          style={{ display: 'none' }}
+        />
+      ))}
+
       <Box onClick={handleClick} cursor="pointer" style={{ perspective: '1000px' }}>
         <Box
           style={{
