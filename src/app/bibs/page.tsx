@@ -151,7 +151,9 @@ export default function BibsPage() {
           </Text>
         ) : (
           (() => {
-            const latestPrelaitId = list.find(item => item.type === 'Biberon (prélait)')?.id
+            const latestBiberonId = list.find(
+              item => item.type === 'Biberon (prélait)' || item.type === "Biberon (lait mat')"
+            )?.id
             return list.map(item => (
               <Box
                 key={item.id}
@@ -174,8 +176,8 @@ export default function BibsPage() {
                       {formatDateTime(item.created_at)}
                     </Text>
                   </VStack>
-                  {((item.type === 'Biberon (prélait)' && item.id === latestPrelaitId) ||
-                    item.type === "Biberon (lait mat')") &&
+                  {(item.type === 'Biberon (prélait)' || item.type === "Biberon (lait mat')") &&
+                    item.id === latestBiberonId &&
                     (() => {
                       const { diffHours, diffMinutes, totalHours } = formatCountdown(
                         item.created_at,
