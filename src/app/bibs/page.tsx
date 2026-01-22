@@ -170,20 +170,24 @@ export default function BibsPage() {
                     {formatDateTime(item.created_at)}
                   </Text>
                 </VStack>
-                {item.type === "Biberon (lait mat')" && (() => {
-                  const { diffHours, diffMinutes, totalHours } = formatCountdown(item.created_at, now)
-                  const isOver3Hours = totalHours >= 3
-                  const isOver2Hours = totalHours >= 2
-                  return (
-                    <Text
-                      fontSize="xl"
-                      fontWeight="bold"
-                      color={isOver3Hours ? 'red.500' : isOver2Hours ? 'green.500' : 'gray.400'}
-                    >
-                      {diffHours}h {diffMinutes}m
-                    </Text>
-                  )
-                })()}
+                {item.type === "Biberon (lait mat')" &&
+                  (() => {
+                    const { diffHours, diffMinutes, totalHours } = formatCountdown(
+                      item.created_at,
+                      now
+                    )
+                    const isOver3Hours = totalHours >= 3
+                    const isOver2Hours = totalHours >= 2
+                    return (
+                      <Text
+                        fontSize="xl"
+                        fontWeight="bold"
+                        color={isOver3Hours ? 'red.500' : isOver2Hours ? 'green.500' : 'gray.400'}
+                      >
+                        {diffHours}h {diffMinutes}m
+                      </Text>
+                    )
+                  })()}
               </HStack>
             </Box>
           ))
