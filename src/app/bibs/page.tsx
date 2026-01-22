@@ -175,8 +175,7 @@ export default function BibsPage() {
                     </Text>
                   </VStack>
                   {((item.type === 'Biberon (prélait)' && item.id === latestPrelaitId) ||
-                    item.type === "Biberon (lait mat')" ||
-                    item.type === 'Têtée') &&
+                    item.type === "Biberon (lait mat')") &&
                     (() => {
                       const { diffHours, diffMinutes, totalHours } = formatCountdown(
                         item.created_at,
