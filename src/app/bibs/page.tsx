@@ -122,7 +122,9 @@ export default function BibsPage() {
   if (loading) {
     return (
       <VStack gap={6} py={8} mt={30} align="stretch">
-        <Spinner />
+        <HStack justify="center" py={4}>
+          <Spinner size="200px" />
+        </HStack>
       </VStack>
     )
   }
@@ -148,49 +150,54 @@ export default function BibsPage() {
             Aucun élément enregistré
           </Text>
         ) : (
-          list.map(item => (
-            <Box
-              key={item.id}
-              border="1px solid"
-              borderColor={brandColors.accent}
-              borderRadius="xl"
-              p={6}
-              w="full"
-              transition="all 0.3s"
-              _hover={{
-                borderColor: brandColors.primary,
-                transform: 'translateY(-2px)',
-                boxShadow: 'lg',
-              }}
-            >
-              <HStack justify="space-between" w="full" align="center">
-                <VStack align="start" gap={2}>
-                  <Heading size="md">{item.type}</Heading>
-                  <Text fontSize="sm" color="gray.400">
-                    {formatDateTime(item.created_at)}
-                  </Text>
-                </VStack>
-                {item.type === "Biberon (lait mat')" &&
-                  (() => {
-                    const { diffHours, diffMinutes, totalHours } = formatCountdown(
-                      item.created_at,
-                      now
-                    )
-                    const isOver3Hours = totalHours >= 3
-                    const isOver2Hours = totalHours >= 2
-                    return (
-                      <Text
-                        fontSize="xl"
-                        fontWeight="bold"
-                        color={isOver3Hours ? 'red.500' : isOver2Hours ? 'green.500' : 'gray.400'}
-                      >
-                        {diffHours}h {diffMinutes}m
-                      </Text>
-                    )
-                  })()}
-              </HStack>
-            </Box>
-          ))
+          (() => {
+            const latestPrelaitId = list.find(item => item.type === 'Biberon (prélait)')?.id
+            return list.map(item => (
+              <Box
+                key={item.id}
+                border="1px solid"
+                borderColor={brandColors.accent}
+                borderRadius="xl"
+                p={6}
+                w="full"
+                transition="all 0.3s"
+                _hover={{
+                  borderColor: brandColors.primary,
+                  transform: 'translateY(-2px)',
+                  boxShadow: 'lg',
+                }}
+              >
+                <HStack justify="space-between" w="full" align="center">
+                  <VStack align="start" gap={2}>
+                    <Heading size="md">{item.type}</Heading>
+                    <Text fontSize="sm" color="gray.400">
+                      {formatDateTime(item.created_at)}
+                    </Text>
+                  </VStack>
+                  {((item.type === 'Biberon (prélait)' && item.id === latestPrelaitId) ||
+                    item.type === "Biberon (lait mat')" ||
+                    item.type === 'Têtée') &&
+                    (() => {
+                      const { diffHours, diffMinutes, totalHours } = formatCountdown(
+                        item.created_at,
+                        now
+                      )
+                      const isOver3Hours = totalHours >= 3
+                      const isOver2Hours = totalHours >= 2
+                      return (
+                        <Text
+                          fontSize="xl"
+                          fontWeight="bold"
+                          color={isOver3Hours ? 'red.500' : isOver2Hours ? 'green.500' : 'gray.400'}
+                        >
+                          {diffHours}h {diffMinutes}m
+                        </Text>
+                      )
+                    })()}
+                </HStack>
+              </Box>
+            ))
+          })()
         )}
       </VStack>
 
@@ -208,6 +215,7 @@ export default function BibsPage() {
                     <NativeSelect.Field
                       value={selectedType}
                       onChange={e => setSelectedType(e.target.value)}
+                      pl={4}
                     >
                       {ITEM_TYPES.map(type => (
                         <option key={type} value={type}>
