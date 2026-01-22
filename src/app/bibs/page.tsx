@@ -15,6 +15,7 @@ interface BibItem {
   id: number
   type: string
   created_at: string
+  comment: string | null
 }
 
 const ITEM_TYPES = ['Biberon (prélait)', "Biberon (lait mat')", 'Têtée', 'Selles', 'Urine']
@@ -50,6 +51,7 @@ export default function BibsPage() {
   const [isOpen, setIsOpen] = useState(false)
   const [selectedType, setSelectedType] = useState(ITEM_TYPES[0])
   const [dateTime, setDateTime] = useState(getLocalDateTimeString())
+  const [comment, setComment] = useState('')
   const [list, setList] = useState<BibItem[]>([])
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
@@ -82,6 +84,7 @@ export default function BibsPage() {
   const handleOpenDialog = () => {
     setDateTime(getLocalDateTimeString())
     setSelectedType(ITEM_TYPES[0])
+    setComment('')
     setIsOpen(true)
   }
 
@@ -89,6 +92,7 @@ export default function BibsPage() {
     setIsOpen(false)
     setSelectedType(ITEM_TYPES[0])
     setDateTime(getLocalDateTimeString())
+    setComment('')
   }
 
   const handleSubmit = async () => {
@@ -102,6 +106,7 @@ export default function BibsPage() {
         body: JSON.stringify({
           type: selectedType,
           created_at: new Date(dateTime).toISOString(),
+          comment: comment || null,
         }),
       })
 
@@ -151,7 +156,9 @@ export default function BibsPage() {
           </Text>
         ) : (
           (() => {
-            const latestPrelaitId = list.find(item => item.type === 'Biberon (prélait)')?.id
+            const latestBiberonId = list.find(
+              item => item.type === 'Biberon (prélait)' || item.type === "Biberon (lait mat')"
+            )?.id
             return list.map(item => (
               <Box
                 key={item.id}
@@ -173,16 +180,20 @@ export default function BibsPage() {
                     <Text fontSize="sm" color="gray.400">
                       {formatDateTime(item.created_at)}
                     </Text>
+                    {item.comment && (
+                      <Text fontSize="sm" color="gray.300">
+                        {item.comment}
+                      </Text>
+                    )}
                   </VStack>
-                  {((item.type === 'Biberon (prélait)' && item.id === latestPrelaitId) ||
-                    item.type === "Biberon (lait mat')" ||
-                    item.type === 'Têtée') &&
+                  {(item.type === 'Biberon (prélait)' || item.type === "Biberon (lait mat')") &&
+                    item.id === latestBiberonId &&
                     (() => {
                       const { diffHours, diffMinutes, totalHours } = formatCountdown(
                         item.created_at,
                         now
                       )
-                      const isOver3Hours = totalHours >= 3
+                      const isOver3Hours = totalHours >= 2.5
                       const isOver2Hours = totalHours >= 2
                       return (
                         <Text
@@ -230,6 +241,14 @@ export default function BibsPage() {
                     type="datetime-local"
                     value={dateTime}
                     onChange={e => setDateTime(e.target.value)}
+                  />
+                </Field>
+                <Field label="Commentaire">
+                  <Input
+                    type="text"
+                    placeholder="Optionnel"
+                    value={comment}
+                    onChange={e => setComment(e.target.value)}
                   />
                 </Field>
               </VStack>

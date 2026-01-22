@@ -4,7 +4,7 @@ import { sql } from '@/lib/db'
 export async function GET() {
   try {
     const items = await sql`
-      SELECT id, type, created_at
+      SELECT id, type, created_at, comment
       FROM bibs
       ORDER BY created_at DESC
     `
@@ -18,16 +18,16 @@ export async function GET() {
 export async function POST(request: Request) {
   try {
     const body = await request.json()
-    const { type, created_at } = body
+    const { type, created_at, comment } = body
 
     if (!type || !created_at) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 })
     }
 
     const result = await sql`
-      INSERT INTO bibs (type, created_at)
-      VALUES (${type}, ${created_at})
-      RETURNING id, type, created_at
+      INSERT INTO bibs (type, created_at, comment)
+      VALUES (${type}, ${created_at}, ${comment || null})
+      RETURNING id, type, created_at, comment
     `
 
     return NextResponse.json((result as Record<string, unknown>[])[0])
