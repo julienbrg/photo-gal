@@ -213,6 +213,7 @@ export default function BibsPage() {
                     <NativeSelect.Field
                       value={selectedType}
                       onChange={e => setSelectedType(e.target.value)}
+                      pl={4}
                     >
                       {ITEM_TYPES.map(type => (
                         <option key={type} value={type}>
