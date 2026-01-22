@@ -30,7 +30,7 @@ export async function POST(request: Request) {
       RETURNING id, type, created_at
     `
 
-    return NextResponse.json(result[0])
+    return NextResponse.json((result as Record<string, unknown>[])[0])
   } catch (error) {
     console.error('Database error:', error)
     return NextResponse.json({ error: 'Failed to add item' }, { status: 500 })
