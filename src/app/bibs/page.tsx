@@ -182,7 +182,7 @@ export default function BibsPage() {
                         item.created_at,
                         now
                       )
-                      const isOver3Hours = totalHours >= 3
+                      const isOver3Hours = totalHours >= 2.5
                       const isOver2Hours = totalHours >= 2
                       return (
                         <Text
