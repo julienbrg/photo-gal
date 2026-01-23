@@ -9,7 +9,7 @@ import { Field } from '@/components/ui/field'
 import { Button } from '@/components/ui/button'
 import { IconButton } from '@/components/ui/icon-button'
 import Spinner from '@/components/Spinner'
-import { LuPlus } from 'react-icons/lu'
+import { LuPlus, LuRefreshCw } from 'react-icons/lu'
 
 interface BibItem {
   id: number
@@ -65,6 +65,7 @@ export default function BibsPage() {
   const [list, setList] = useState<BibItem[]>([])
   const [loading, setLoading] = useState(true)
   const [submitting, setSubmitting] = useState(false)
+  const [refreshing, setRefreshing] = useState(false)
   const [now, setNow] = useState(new Date())
 
   useEffect(() => {
@@ -88,6 +89,20 @@ export default function BibsPage() {
       console.error('Failed to fetch items:', error)
     } finally {
       setLoading(false)
+    }
+  }
+
+  const handleRefresh = async () => {
+    try {
+      setRefreshing(true)
+      const response = await fetch('/api/bibs')
+      const data = await response.json()
+      setList(data)
+      setNow(new Date())
+    } catch (error) {
+      console.error('Failed to refresh items:', error)
+    } finally {
+      setRefreshing(false)
     }
   }
 
@@ -149,15 +164,27 @@ export default function BibsPage() {
       <VStack gap={6} py={8} mt={30} align="stretch">
         <HStack justify="space-between" align="center">
           <Heading size="lg">Suivi</Heading>
-          <IconButton
-            aria-label="Ajouter"
-            onClick={handleOpenDialog}
-            colorScheme="blue"
-            rounded="full"
-            size="lg"
-          >
-            <LuPlus />
-          </IconButton>
+          <HStack gap={2}>
+            <IconButton
+              aria-label="Rafraîchir"
+              onClick={handleRefresh}
+              variant="ghost"
+              rounded="full"
+              size="lg"
+              loading={refreshing}
+            >
+              <LuRefreshCw />
+            </IconButton>
+            <IconButton
+              aria-label="Ajouter"
+              onClick={handleOpenDialog}
+              colorScheme="blue"
+              rounded="full"
+              size="lg"
+            >
+              <LuPlus />
+            </IconButton>
+          </HStack>
         </HStack>
 
         {list.length === 0 ? (
