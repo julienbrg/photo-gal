@@ -20,8 +20,18 @@ interface BibItem {
 
 const ITEM_TYPES = ['Biberon (prélait)', "Biberon (lait mat')", 'Têtée', 'Selles', 'Urine']
 
+// Parse date string as UTC (database stores UTC but may return without Z suffix)
+const parseAsUTC = (dateString: string) => {
+  // If already has timezone info (Z or +/-offset), parse directly
+  if (dateString.endsWith('Z') || /[+-]\d{2}:?\d{2}$/.test(dateString)) {
+    return new Date(dateString)
+  }
+  // Otherwise, append Z to treat as UTC
+  return new Date(dateString.replace(' ', 'T') + 'Z')
+}
+
 const formatDateTime = (dateString: string) => {
-  const date = new Date(dateString)
+  const date = parseAsUTC(dateString)
   return date.toLocaleString('fr-FR', {
     day: '2-digit',
     month: '2-digit',
@@ -32,7 +42,7 @@ const formatDateTime = (dateString: string) => {
 }
 
 const formatCountdown = (createdAt: string, now: Date) => {
-  const created = new Date(createdAt)
+  const created = parseAsUTC(createdAt)
   const diffMs = now.getTime() - created.getTime()
   const diffHours = Math.floor(diffMs / (1000 * 60 * 60))
   const diffMinutes = Math.floor((diffMs % (1000 * 60 * 60)) / (1000 * 60))
