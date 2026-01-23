@@ -10,6 +10,8 @@ import { Button } from '@/components/ui/button'
 import { IconButton } from '@/components/ui/icon-button'
 import Spinner from '@/components/Spinner'
 import { LuPlus, LuRefreshCw } from 'react-icons/lu'
+import { useW3PK } from '@/context/W3PK'
+import { createSiweMessage, generateSiweNonce } from 'w3pk'
 
 interface BibItem {
   id: number
@@ -112,6 +114,10 @@ export default function BibsPage() {
   const [submitting, setSubmitting] = useState(false)
   const [refreshing, setRefreshing] = useState(false)
   const [now, setNow] = useState(new Date())
+  const [accessDenied, setAccessDenied] = useState(false)
+  const [checkingAuth, setCheckingAuth] = useState(false)
+
+  const { isAuthenticated, user, getAddress, signMessage } = useW3PK()
 
   useEffect(() => {
     fetchItems()
@@ -151,10 +157,69 @@ export default function BibsPage() {
     }
   }
 
+  const checkAuthorization = async (): Promise<boolean> => {
+    if (!isAuthenticated || !user) {
+      return false
+    }
+
+    try {
+      // Get the STANDARD+MAIN address
+      const address = await getAddress('STANDARD', 'MAIN')
+
+      // Create SIWE message
+      const nonce = generateSiweNonce()
+      const siweMessage = createSiweMessage({
+        domain: window.location.host,
+        address,
+        statement: 'Authorize adding items to bibs',
+        uri: window.location.origin,
+        version: '1',
+        chainId: 1,
+        nonce,
+        issuedAt: new Date().toISOString(),
+      })
+
+      // Sign the message using SIWE method with STANDARD+MAIN
+      const signature = await signMessage(siweMessage, {
+        mode: 'STANDARD',
+        tag: 'MAIN',
+        signingMethod: 'SIWE',
+      })
+
+      if (!signature) {
+        return false
+      }
+
+      // Verify with the API
+      const response = await fetch('/api/bibs/authorize', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          message: siweMessage,
+          signature,
+        }),
+      })
+
+      if (response.ok) {
+        const data = await response.json()
+        return data.authorized === true
+      }
+
+      return false
+    } catch (error) {
+      console.error('Authorization check failed:', error)
+      return false
+    }
+  }
+
   const handleOpenDialog = () => {
     setDateTime(getLocalDateTimeString())
     setSelectedType(ITEM_TYPES[0])
     setComment('')
+    setAccessDenied(false)
+    setCheckingAuth(false)
     setIsOpen(true)
   }
 
@@ -163,11 +228,25 @@ export default function BibsPage() {
     setSelectedType(ITEM_TYPES[0])
     setDateTime(getLocalDateTimeString())
     setComment('')
+    setAccessDenied(false)
+    setCheckingAuth(false)
   }
 
   const handleSubmit = async () => {
     try {
       setSubmitting(true)
+
+      // Check authorization first
+      setCheckingAuth(true)
+      const authorized = await checkAuthorization()
+      setCheckingAuth(false)
+
+      if (!authorized) {
+        setAccessDenied(true)
+        setSubmitting(false)
+        return
+      }
+
       const response = await fetch('/api/bibs', {
         method: 'POST',
         headers: {
@@ -312,50 +391,90 @@ export default function BibsPage() {
         <Dialog.Backdrop />
         <Dialog.Positioner>
           <Dialog.Content>
-            <Dialog.Header>
-              <Dialog.Title>Ajouter un élément</Dialog.Title>
-            </Dialog.Header>
+            {!accessDenied && (
+              <Dialog.Header>
+                <Dialog.Title>Ajouter un élément</Dialog.Title>
+              </Dialog.Header>
+            )}
             <Dialog.Body py={6}>
-              <VStack gap={4}>
-                <Field label="Type">
-                  <NativeSelect.Root>
-                    <NativeSelect.Field
-                      value={selectedType}
-                      onChange={e => setSelectedType(e.target.value)}
-                      pl={4}
-                    >
-                      {ITEM_TYPES.map(type => (
-                        <option key={type} value={type}>
-                          {type}
-                        </option>
-                      ))}
-                    </NativeSelect.Field>
-                  </NativeSelect.Root>
-                </Field>
-                <Field label="Date et heure">
-                  <Input
-                    type="datetime-local"
-                    value={dateTime}
-                    onChange={e => setDateTime(e.target.value)}
-                  />
-                </Field>
-                <Field label="Commentaire">
-                  <Input
-                    type="text"
-                    placeholder="Optionnel"
-                    value={comment}
-                    onChange={e => setComment(e.target.value)}
-                  />
-                </Field>
-              </VStack>
+              {accessDenied ? (
+                <VStack gap={4} py={8}>
+                  <style>
+                    {`
+                      @keyframes blink {
+                        0%, 49% { opacity: 1; }
+                        50%, 100% { opacity: 0; }
+                      }
+                    `}
+                  </style>
+                  <Text
+                    color="red.500"
+                    fontSize="lg"
+                    fontWeight="semibold"
+                    style={{ animation: 'blink 0.8s step-end infinite' }}
+                  >
+                    ⚠️ Access denied ⚠️
+                  </Text>
+                  <br />
+                  <Text
+                    fontSize="sm"
+                    fontStyle="italic"
+                    fontWeight="bold"
+                    color={brandColors.primary}
+                    textAlign="center"
+                  >
+                    Don&apos;t even try to touch it, otherwise we won&apos;t hesitate to destroy
+                    your own device from inside.
+                  </Text>
+                </VStack>
+              ) : (
+                <VStack gap={4}>
+                  <Field label="Type">
+                    <NativeSelect.Root>
+                      <NativeSelect.Field
+                        value={selectedType}
+                        onChange={e => setSelectedType(e.target.value)}
+                        pl={4}
+                      >
+                        {ITEM_TYPES.map(type => (
+                          <option key={type} value={type}>
+                            {type}
+                          </option>
+                        ))}
+                      </NativeSelect.Field>
+                    </NativeSelect.Root>
+                  </Field>
+                  <Field label="Date et heure">
+                    <Input
+                      type="datetime-local"
+                      value={dateTime}
+                      onChange={e => setDateTime(e.target.value)}
+                    />
+                  </Field>
+                  <Field label="Commentaire">
+                    <Input
+                      type="text"
+                      placeholder="Optionnel"
+                      value={comment}
+                      onChange={e => setComment(e.target.value)}
+                    />
+                  </Field>
+                </VStack>
+              )}
             </Dialog.Body>
             <Dialog.Footer gap={3}>
               <Button variant="ghost" onClick={handleClose}>
-                Annuler
+                {accessDenied ? 'Fermer' : 'Annuler'}
               </Button>
-              <Button colorScheme="blue" onClick={handleSubmit} loading={submitting}>
-                Ajouter
-              </Button>
+              {!accessDenied && (
+                <Button
+                  colorScheme="blue"
+                  onClick={handleSubmit}
+                  loading={submitting || checkingAuth}
+                >
+                  Ajouter
+                </Button>
+              )}
             </Dialog.Footer>
             <Dialog.CloseTrigger />
           </Dialog.Content>
