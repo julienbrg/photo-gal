@@ -79,18 +79,20 @@ export default function NaissancePage() {
       doc.setTextColor(0, 0, 0)
       doc.setFontSize(11)
       doc.text('Adresse:', 20, yPosition)
-      yPosition += 7
+      yPosition += 14
+      doc.setFont('helvetica', 'bold')
       const addressLines = postalAddress.split(',').map(line => line.trim())
       addressLines.forEach(line => {
         doc.text(line, 20, yPosition)
         yPosition += 6
       })
+      doc.setFont('helvetica', 'normal')
     }
 
     yPosition += 20
     doc.setFontSize(24)
     doc.setTextColor(0, 0, 0)
-    doc.text("Merci d'avance !", 20, yPosition)
+    doc.text("Merci d'avance !!", 20, yPosition)
 
     doc.save('cadeau-pour-milan.pdf')
   }
