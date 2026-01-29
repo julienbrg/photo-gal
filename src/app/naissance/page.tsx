@@ -8,6 +8,7 @@ import { Input } from '@/components/ui/input'
 import { Field } from '@/components/ui/field'
 import { Button } from '@/components/ui/button'
 import Spinner from '@/components/Spinner'
+import { jsPDF } from 'jspdf'
 
 interface NaissanceItem {
   id: number
@@ -55,6 +56,47 @@ export default function NaissancePage() {
     setSelectedItem(null)
   }
 
+  const generatePdf = (item: NaissanceItem) => {
+    const doc = new jsPDF()
+
+    doc.setFontSize(20)
+    doc.text(item.name, 20, 30)
+
+    doc.setFontSize(12)
+    const descriptionLines = doc.splitTextToSize(item.description, 170)
+    doc.text(descriptionLines, 20, 50)
+
+    let yPosition = 50 + descriptionLines.length * 7 + 10
+
+    if (item.link) {
+      doc.setTextColor(0, 0, 255)
+      doc.textWithLink(item.link, 20, yPosition, { url: item.link })
+      yPosition += 15
+    }
+
+    const postalAddress = process.env.NEXT_PUBLIC_POSTAL_ADDRESS
+    if (postalAddress) {
+      doc.setTextColor(0, 0, 0)
+      doc.setFontSize(11)
+      doc.text('Adresse:', 20, yPosition)
+      yPosition += 14
+      doc.setFont('helvetica', 'bold')
+      const addressLines = postalAddress.split(',').map(line => line.trim())
+      addressLines.forEach(line => {
+        doc.text(line, 20, yPosition)
+        yPosition += 6
+      })
+      doc.setFont('helvetica', 'normal')
+    }
+
+    yPosition += 20
+    doc.setFontSize(24)
+    doc.setTextColor(0, 0, 0)
+    doc.text("Merci d'avance !!", 20, yPosition)
+
+    doc.save('cadeau-pour-milan.pdf')
+  }
+
   const handleSubmit = async () => {
     if (!selectedItem || !name.trim()) {
       return
@@ -73,6 +115,7 @@ export default function NaissancePage() {
       })
 
       if (response.ok) {
+        generatePdf(selectedItem)
         // Remove the item from the list (it's now status 1)
         setList(prevList => prevList.filter(item => item.id !== selectedItem.id))
         handleClose()
@@ -95,6 +138,10 @@ export default function NaissancePage() {
   return (
     <>
       <VStack gap={6} py={8} mt={30} align="stretch">
+        <Text fontSize="lg">Cliquez sur un des cadeaux de la liste pour le réserver.</Text>
+        <Text mb={10} fontSize="lg">
+          Merci d&apos;avance ! ❤️{' '}
+        </Text>
         {list.map(item => (
           <Box
             key={item.id}
@@ -123,8 +170,15 @@ export default function NaissancePage() {
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={e => e.stopPropagation()}
+                  style={{ maxWidth: '100%' }}
                 >
-                  <Text fontSize="sm" color="blue.500" _hover={{ textDecoration: 'underline' }}>
+                  <Text
+                    fontSize="sm"
+                    color="blue.500"
+                    _hover={{ textDecoration: 'underline' }}
+                    wordBreak="break-all"
+                    overflowWrap="anywhere"
+                  >
                     {item.link}
                   </Text>
                 </Link>
@@ -149,6 +203,9 @@ export default function NaissancePage() {
                   onChange={e => setName(e.target.value)}
                 />
               </Field>
+              <Text fontSize="xs" color="gray.400" mt={2}>
+                Visible uniquement par Céline et Julien
+              </Text>
             </Dialog.Body>
             <Dialog.Footer gap={3}>
               <Button variant="ghost" onClick={handleClose}>
