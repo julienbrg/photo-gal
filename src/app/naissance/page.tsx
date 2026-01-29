@@ -95,6 +95,10 @@ export default function NaissancePage() {
   return (
     <>
       <VStack gap={6} py={8} mt={30} align="stretch">
+        <Text fontSize="lg">Cliquez sur un des cadeaux de la liste pour le réserver.</Text>
+        <Text mb={10} fontSize="lg">
+          Merci d&apos;avance ! ❤️{' '}
+        </Text>
         {list.map(item => (
           <Box
             key={item.id}
@@ -149,6 +153,9 @@ export default function NaissancePage() {
                   onChange={e => setName(e.target.value)}
                 />
               </Field>
+              <Text fontSize="xs" color="gray.400" mt={2}>
+                Visible uniquement par Céline et Julien
+              </Text>
             </Dialog.Body>
             <Dialog.Footer gap={3}>
               <Button variant="ghost" onClick={handleClose}>
