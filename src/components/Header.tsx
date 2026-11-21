@@ -263,14 +263,14 @@ export default function Header() {
                 <Portal>
                   <MenuPositioner>
                     <MenuContent minWidth="auto">
-                      <Link href="/naissance" color="white">
-                        <MenuItem value="naissance" fontSize="md" px={4} py={3}>
-                          Naissance
+                      <Link href="/montpellier" color="white">
+                        <MenuItem value="montpellier" fontSize="md" px={4} py={3}>
+                          Montpellier
                         </MenuItem>
                       </Link>
-                      <Link href="/bibs" color="white">
-                        <MenuItem value="bibs" fontSize="md" px={4} py={3}>
-                          Bibs
+                      <Link href="/chansons" color="white">
+                        <MenuItem value="chansons" fontSize="md" px={4} py={3}>
+                          Chansons
                         </MenuItem>
                       </Link>
                       <Link href="/settings" color="white">
