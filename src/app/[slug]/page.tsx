@@ -1,6 +1,5 @@
 import { Box, Container, Heading, Link, Stack, Text } from '@chakra-ui/react'
 import type { Metadata } from 'next'
-import NextLink from 'next/link'
 import { notFound } from 'next/navigation'
 import Markdown from 'react-markdown'
 import { getSong, getSongIds, groupCredits } from '../chansons/songs'
@@ -44,11 +43,7 @@ export default async function SongPage({ params }: Props) {
 
   return (
     <Container maxW="2xl" py={12}>
-      <Link asChild color={linkColor} fontSize="sm" fontWeight="600">
-        <NextLink href="/chansons">← Chansons</NextLink>
-      </Link>
-
-      <Heading as="h1" size="2xl" mt={6}>
+      <Heading as="h1" size="2xl">
         {song.title}
       </Heading>
       <Text mt={2} color="fg.muted">
