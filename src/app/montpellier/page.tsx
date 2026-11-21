@@ -9,7 +9,7 @@ type Filter = Category | typeof ALL
 
 const ROUND_UPS: Category = 'Sélections'
 
-const fold = (s: string) => s.normalize('NFD').replace(/[̀-ͯ]/g, '').toLowerCase()
+const fold = (s: string) => s.normalize('NFD').replace(/\p{M}/gu, '').toLowerCase()
 
 const INDEX = PLACES.map(p => ({ place: p, text: fold(`${p.name} ${p.description} ${p.address}`) }))
 
@@ -111,6 +111,7 @@ export default function MontpellierPage() {
           type="search"
           placeholder="Chercher un nom, un plat, une rue…"
           autoComplete="off"
+          px={3}
           value={query}
           onChange={e => setQuery(e.target.value)}
         />
@@ -121,11 +122,14 @@ export default function MontpellierPage() {
               <Button
                 key={c}
                 size="xs"
+                px={3}
+                gap={1.5}
                 rounded="full"
                 variant={pressed ? 'solid' : 'outline'}
                 bg={pressed ? 'brand.primary' : undefined}
                 borderColor={pressed ? 'brand.primary' : undefined}
                 color={pressed ? 'white' : undefined}
+                _hover={pressed ? { bg: 'brand.secondary' } : undefined}
                 aria-pressed={pressed}
                 onClick={() => setActive(c)}
               >
