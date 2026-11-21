@@ -13,6 +13,7 @@ All notable changes to this project are documented in this file. The format is b
 - Translations for every new string in all 10 languages
 - `templateVersion` in `package.json`, recording the genji template release this project is on (3.5.0)
 - `/montpellier` and `/chansons` pages, linked from the menu
+- Song list on `/chansons`, read from one JSON file per song in `public/songs/`, with title, performer and Spotify link
 
 ### Changed
 
