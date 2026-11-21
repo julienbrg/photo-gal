@@ -1,6 +1,7 @@
 {
   "name": "photo-gal",
   "version": "0.1.0",
+  "templateVersion": "3.5.0",
   "description": "celineetjulien.com",
   "main": "index.js",
   "scripts": {
@@ -14,34 +15,34 @@
     "test:a11y": "echo '⚠️  Run Lighthouse in Chrome DevTools or install pa11y: npx pa11y http://localhost:3000'"
   },
   "dependencies": {
-    "@chakra-ui/react": "^3.31.0",
+    "@chakra-ui/react": "^3.38.0",
     "@emotion/react": "^11.14.0",
     "@neondatabase/serverless": "^1.0.2",
     "@types/react-syntax-highlighter": "^15.5.13",
-    "ethers": "^6.16.0",
+    "ethers": "^6.17.0",
     "jspdf": "^4.0.0",
-    "next": "^16.1.6",
+    "next": "^16.4.6",
     "next-themes": "^0.4.6",
     "qrcode.react": "^4.2.0",
-    "react": "^19.2.4",
-    "react-dom": "^19.2.4",
-    "react-icons": "^5.5.0",
-    "react-syntax-highlighter": "^16.1.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "react-icons": "^5.7.0",
+    "react-syntax-highlighter": "^16.1.2",
     "secrets.js-34r7h": "^2.0.2",
-    "w3pk": "^0.8.8"
+    "w3pk": "^0.12.4"
   },
   "devDependencies": {
-    "@eslint/eslintrc": "^3.3.3",
-    "@types/node": "^25.1.0",
-    "@types/react": "^19.2.10",
-    "@types/react-dom": "^19.2.3",
-    "eslint": "^9.39.2",
-    "eslint-config-next": "^16.1.6",
+    "@eslint/eslintrc": "^3.3.7",
+    "@types/node": "^26.6.6",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "eslint": "^9.39.5",
+    "eslint-config-next": "^16.4.6",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-jsx-a11y": "^6.10.2",
-    "prettier": "^3.8.1",
-    "tsup": "^8.5.1",
-    "typescript": "^5.9.3"
+    "prettier": "^3.10.1",
+    "tsup": "^9.0.0",
+    "typescript": "^6.0.3"
   },
   "pnpm": {
     "onlyBuiltDependencies": [
@@ -49,6 +50,23 @@
       "esbuild",
       "sharp",
       "unrs-resolver"
-    ]
-  }
+    ],
+    "overrides": {
+      "underscore@<1.13.8": ">=1.13.8",
+      "ws@>=8.0.0 <8.21.0": ">=8.21.0",
+      "brace-expansion@1": ">=1.1.21 <2",
+      "brace-expansion@2": ">=2.1.7 <3",
+      "brace-expansion@5": ">=5.0.12 <6",
+      "js-yaml@4": ">=4.3.2 <5",
+      "source-map-js@1": ">=1.2.2 <2",
+      "sharp@<0.35.5": ">=0.35.5",
+      "baseline-browser-mapping@2": ">=2.11.0 <3",
+      "esbuild@>=0.27.3 <0.28.1": ">=0.28.1",
+      "circomlibjs": "-"
+    }
+  },
+  "engines": {
+    "node": ">=24.22.1"
+  },
+  "packageManager": "pnpm@10.23.0+sha1.b4a44ab0dc2adf2e36371d11d8eb0dc78ffc976c"
 }

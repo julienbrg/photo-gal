@@ -6,6 +6,8 @@ import { Box, Container } from '@chakra-ui/react'
 import { metadata } from './metadata'
 import { LanguageProvider } from '@/context/LanguageContext'
 import { Toaster } from '@/components/ui/toaster'
+import BackupStep from '@/components/BackupStep'
+import { getBrowserCompatScript } from '@/utils/browserCompat'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -20,6 +22,7 @@ export default function RootLayout({
     <html lang="fr" translate="no" suppressHydrationWarning>
       <head>
         <meta name="google" content="notranslate" />
+        <script dangerouslySetInnerHTML={{ __html: getBrowserCompatScript() }} />
       </head>
       <body className={inter.className} suppressHydrationWarning>
         <a href="#main-content" className="skip-link">
@@ -37,6 +40,7 @@ export default function RootLayout({
                 {children}
               </Container>
             </Box>
+            <BackupStep />
             <Toaster />
           </LanguageProvider>
         </ContextProvider>
