@@ -263,11 +263,6 @@ export default function Header() {
                 <Portal>
                   <MenuPositioner>
                     <MenuContent minWidth="auto">
-                      <Link href="/naissance" color="white">
-                        <MenuItem value="naissance" fontSize="md" px={4} py={3}>
-                          Naissance
-                        </MenuItem>
-                      </Link>
                       <Link href="/bibs" color="white">
                         <MenuItem value="bibs" fontSize="md" px={4} py={3}>
                           Bibs
