@@ -1,0 +1,64 @@
+{
+  "id": "nature-boy",
+  "kind": "song",
+  "title": "Nature Boy",
+  "lang": "en",
+  "date": "1947",
+  "tags": [
+    "jazz",
+    "standard"
+  ],
+  "credits": [
+    {
+      "name": "eden ahbez",
+      "role": "words"
+    },
+    {
+      "name": "eden ahbez",
+      "role": "music"
+    }
+  ],
+  "recordings": [
+    {
+      "performer": "George Benson",
+      "year": 1977,
+      "spotify": "https://open.spotify.com/track/2TeYqtSnWGOeo6hbhybmng?si=4e3e7eba36ef449a",
+      "label": ""
+    },
+    {
+      "performer": "Nat King Cole",
+      "year": 1948,
+      "spotify": "https://open.spotify.com/track/0VGZEG1GQ3ZCtJIlX6osww",
+      "label": "Capitol"
+    }
+  ],
+  "blocks": [
+    {
+      "lines": [
+        "There was a boy",
+        "A very strange, enchanted boy",
+        "They say he wandered very far",
+        "Very far, over land and sea",
+        "A little shy and sad of eye",
+        "But very wise was he"
+      ]
+    },
+    {
+      "lines": [
+        "And then one day",
+        "A magic day he passed my way",
+        "And while we spoke of many things",
+        "Fools and kings, this he said to me",
+        "\"The greatest thing you'll ever learn",
+        "Is just to love and be loved in return\""
+      ]
+    },
+    {
+      "lines": [
+        "The greatest thing you'll ever learn",
+        "Is just to love and be loved in return"
+      ]
+    }
+  ],
+  "notes": "## Histoire\n\nÉcrite par eden ahbez, figure des premiers « Nature Boys » de Los Angeles, qui signait son nom en minuscules. Il aurait remis la partition à l'entrée des coulisses d'un concert de Nat King Cole en 1947.\n\n## Interprétations\n\nLa version de Nat King Cole, enregistrée en 1947 et parue chez Capitol en 1948, reste la référence : elle a passé plusieurs semaines en tête des ventes américaines.\n\n## Texte\n\nTexte fourni par l'utilisateur, découpage en strophes conservé tel quel."
+}
