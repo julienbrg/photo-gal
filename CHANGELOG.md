@@ -34,3 +34,4 @@ All notable changes to this project are documented in this file. The format is b
 
 - HTTP security headers on every route: Content-Security-Policy, `Strict-Transport-Security`, `X-Frame-Options`, `X-Content-Type-Options`, `Referrer-Policy` and `Permissions-Policy`
 - pnpm overrides for transitive dependencies with known advisories, and `pnpm-workspace.yaml` with a 3-day minimum release age
+- Updated transitive dependencies to fix 13 Dependabot alerts: `browserslist`, `@babel/core`, `@humanfs/node`, `picomatch`, `yaml`, `flatted`, `minimatch` and `jsonpath`
