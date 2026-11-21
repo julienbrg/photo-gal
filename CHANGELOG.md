@@ -12,13 +12,19 @@ All notable changes to this project are documented in this file. The format is b
 - Root error boundary (`src/app/global-error.tsx`) and a "browser too old" or "loading failed" screen instead of an endless spinner
 - Translations for every new string in all 10 languages
 - `templateVersion` in `package.json`, recording the genji template release this project is on (3.5.0)
+- `/montpellier` and `/chansons` pages, linked from the menu
 
 ### Changed
 
-- Updated `w3pk` from 0.8.8 to 0.12.4. Wallets stored by 0.8.x can't be read: login opens `/settings#sync-import` to restore from a backup or a sync file. A newly registered passkey gives a new address, which must be added to `ALLOWED_ADDRESSES` for `/bibs`
+- Updated `w3pk` from 0.8.8 to 0.12.4. Wallets stored by 0.8.x can't be read: login opens `/settings#sync-import` to restore from a backup or a sync file.
 - Registration needs a passkey with WebAuthn PRF
 - Login button follows genji's flow: it opens registration when no passkey exists on the device, and its copy is translated
 - Updated `next` 16.4.6, `react` 19.3.1, `@chakra-ui/react` 3.38.0, `typescript` 6 and `prettier` 3.10; Node.js `>=24.22.1` is required
+
+### Removed
+
+- `/naissance` and `/bibs` pages, their API routes and menu items
+- Neon database client, `DATABASE_URL` and `ALLOWED_ADDRESSES`, and the `@neondatabase/serverless` and `jspdf` dependencies
 
 ### Security
 
