@@ -2160,11 +2160,11 @@ export const translations: Translations = {
       messageSignedDescription: signature => `Signature : ${signature.substring(0, 20)}...`,
     },
     navigation: {
-      settings: 'Paramètres',
+      settings: 'Réglages',
     },
     settings: {
-      title: 'Paramètres',
-      loginRequired: 'Veuillez vous connecter pour accéder à vos paramètres',
+      title: 'Réglages',
+      loginRequired: 'Veuillez vous connecter pour accéder à vos réglages',
       subtitle: 'Gérez vos comptes, sauvegardes et options de récupération',
       tabAccounts: 'Comptes',
       tabBackup: 'Sauvegarde',
@@ -2231,7 +2231,7 @@ export const translations: Translations = {
 
       sessionHeading: 'Garder ma session active',
       sessionDescription:
-        "Définissez la durée pendant laquelle votre session doit rester active sans demande de clé d'accès. Une fois expirée, vous êtes déconnecté et vous vous reconnectez avec votre clé d'accès quand vous le souhaitez — c'est donc aussi la fréquence à laquelle vous vous réauthentifiez. Ce paramètre s'applique uniquement aux modes STANDARD et YOLO. Les modes STRICT et PRIMARY exigent toujours une authentification à chaque fois et n'utilisent pas de sessions persistantes.",
+        "Définissez la durée pendant laquelle votre session doit rester active sans demande de clé d'accès. Une fois expirée, vous êtes déconnecté et vous vous reconnectez avec votre clé d'accès quand vous le souhaitez — c'est donc aussi la fréquence à laquelle vous vous réauthentifiez. Ce réglage s'applique uniquement aux modes STANDARD et YOLO. Les modes STRICT et PRIMARY exigent toujours une authentification à chaque fois et n'utilisent pas de sessions persistantes.",
       noStoredSessionText:
         "Aucune session stockée sur cet appareil. Votre authentificateur ne semble pas prendre en charge l'extension WebAuthn PRF, requise par w3pk pour maintenir les sessions actives de manière sécurisée. Votre session restera uniquement en mémoire : elle se termine à la fermeture de l'onglet, et chaque visite vous demandera votre clé d'accès. Tout le reste fonctionne normalement.",
       sessionDurationLabel: 'Durée de la session',
@@ -2373,7 +2373,7 @@ export const translations: Translations = {
       syncStep2:
         'Étape 2 : Transférer le fichier - Envoyez-le sur votre autre appareil (AirDrop, un stockage en ligne ou un câble), ou scannez son QR code.',
       syncStep3:
-        "Étape 3 : Importer - Sur l'autre appareil, ouvrez les Paramètres, choisissez le fichier et confirmez avec votre passkey. Vous êtes connecté avec le même portefeuille.",
+        "Étape 3 : Importer - Sur l'autre appareil, ouvrez les réglages, choisissez le fichier et confirmez avec votre passkey. Vous êtes connecté avec le même portefeuille.",
       syncExportedTitle: 'Fichier de synchronisation téléchargé',
       syncExportedPasswordDescription:
         'Votre passkey ne prend pas en charge la synchronisation sans mot de passe : ce fichier demandera le mot de passe que vous avez choisi.',
