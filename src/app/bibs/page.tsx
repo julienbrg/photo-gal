@@ -120,10 +120,6 @@ export default function BibsPage() {
   const { isAuthenticated, user, getAddress, signMessage } = useW3PK()
 
   useEffect(() => {
-    fetchItems()
-  }, [])
-
-  useEffect(() => {
     const interval = setInterval(() => {
       setNow(new Date())
     }, 60000)
@@ -142,6 +138,11 @@ export default function BibsPage() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchItems()
+  }, [])
 
   const handleRefresh = async () => {
     try {

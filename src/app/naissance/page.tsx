@@ -26,10 +26,6 @@ export default function NaissancePage() {
   const [list, setList] = useState<NaissanceItem[]>([])
   const [loading, setLoading] = useState(true)
 
-  useEffect(() => {
-    fetchItems()
-  }, [])
-
   const fetchItems = async () => {
     try {
       setLoading(true)
@@ -42,6 +38,11 @@ export default function NaissancePage() {
       setLoading(false)
     }
   }
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    fetchItems()
+  }, [])
 
   const handleOpenDialog = (item: NaissanceItem, e: React.MouseEvent) => {
     e.preventDefault()
