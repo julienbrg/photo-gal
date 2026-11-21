@@ -263,6 +263,11 @@ export default function Header() {
                 <Portal>
                   <MenuPositioner>
                     <MenuContent minWidth="auto">
+                      <Link href="/montpellier" color="white">
+                        <MenuItem value="montpellier" fontSize="md" px={4} py={3}>
+                          Montpellier
+                        </MenuItem>
+                      </Link>
                       <Link href="/settings" color="white">
                         <MenuItem value="settings" fontSize="md" px={4} py={3}>
                           {t.navigation.settings}
