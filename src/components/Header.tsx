@@ -268,6 +268,11 @@ export default function Header() {
                           Montpellier
                         </MenuItem>
                       </Link>
+                      <Link href="/chansons" color="white">
+                        <MenuItem value="chansons" fontSize="md" px={4} py={3}>
+                          Chansons
+                        </MenuItem>
+                      </Link>
                       <Link href="/settings" color="white">
                         <MenuItem value="settings" fontSize="md" px={4} py={3}>
                           {t.navigation.settings}
