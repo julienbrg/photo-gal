@@ -1,7 +1,6 @@
 import { Box, Container, Heading, Link, Stack, Text } from '@chakra-ui/react'
+import NextLink from 'next/link'
 import { getSongs } from './songs'
-
-const SITE = 'https://celineetjulien.com'
 
 const linkColor = { base: 'brand.primary', _dark: 'purple.300' }
 
@@ -18,8 +17,8 @@ export default async function ChansonsPage() {
           const recording = song.recordings?.[0]
           return (
             <Stack as="li" key={song.id} gap={1} py={4} borderBottomWidth="1px">
-              <Link href={`${SITE}/${song.id}`} fontWeight="600" fontSize="lg">
-                {song.title}
+              <Link asChild fontWeight="600" fontSize="lg">
+                <NextLink href={`/${song.id}`}>{song.title}</NextLink>
               </Link>
               {recording && (
                 <Text fontSize="sm">
