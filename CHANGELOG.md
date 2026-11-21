@@ -20,6 +20,8 @@ All notable changes to this project are documented in this file. The format is b
 - Registration needs a passkey with WebAuthn PRF
 - Login button follows genji's flow: it opens registration when no passkey exists on the device, and its copy is translated
 - Updated `next` 16.4.6, `react` 19.3.1, `@chakra-ui/react` 3.38.0, `typescript` 6 and `prettier` 3.10; Node.js `>=24.22.1` is required
+- `/montpellier` lists our saved places in French, with search and category filters
+- French settings say « Réglages » instead of « Paramètres »
 
 ### Removed
 

@@ -53,15 +53,7 @@ function PlaceRow({ place }: { place: Place }) {
         </Text>
       </Box>
       <Stack gap={1} fontSize="sm">
-        {place.address ? (
-          <Text>{place.address}</Text>
-        ) : (
-          isPlace && (
-            <Text color="fg.warning" fontStyle="italic">
-              Adresse non précisée
-            </Text>
-          )
-        )}
+        {(place.address || isPlace) && <Text>{place.address || '\u00a0'}</Text>}
         <Flex wrap="wrap" columnGap={3} rowGap={1}>
           {isPlace && <ExternalLink href={mapUrl(place)}>Carte</ExternalLink>}
           {place.posts.map((url, i) => (
@@ -93,16 +85,15 @@ export default function MontpellierPage() {
     <Box pb={16}>
       <Box pt={8} pb={4}>
         <Heading as="h1" size="3xl">
-          Montpellier
+          Bons plans
         </Heading>
         <Text color="fg.muted" mt={2} maxW="65ch">
-          Nos adresses repérées sur Instagram : restaurants, cafés, bars, sorties et balades, à
-          Montpellier et aux alentours. Quand le post ne donne pas d&apos;adresse, le lien « Carte »
-          cherche le lieu par son nom.
+          Quelques bons plans : restaurants, cafés, bars, sorties et balades, à Montpellier et aux
+          alentours.
         </Text>
       </Box>
 
-      <Stack position="sticky" top="72px" zIndex={5} bg="bg" py={3} gap={3} borderBottomWidth="1px">
+      <Stack py={3} gap={3} borderBottomWidth="1px">
         <label htmlFor="montpellier-search" className="sr-only">
           Chercher une adresse
         </label>
